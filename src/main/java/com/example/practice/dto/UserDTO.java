@@ -1,11 +1,11 @@
 package com.example.practice.dto;
 
-import com.example.practice.entity.Timestamped;
+import com.example.practice.entity.BaseTime;
 import com.example.practice.entity.Users;
 import lombok.Getter;
 
 @Getter
-public class UserDTO extends Timestamped {
+public class UserDTO extends BaseTime {
     private String name;
     private String email;
     private String number;

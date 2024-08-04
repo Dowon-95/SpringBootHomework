@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "S_Board")
-public class Board extends Timestamped {
+public class Board extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

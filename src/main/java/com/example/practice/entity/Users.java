@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "S_USER")
-public class Users extends Timestamped{
+public class Users extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

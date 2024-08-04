@@ -27,7 +27,7 @@ public class BoardService {
 
     @Transactional
     public List<Board> show() {
-       return boardRepository.findAll();
+        return boardRepository.findAll();
     }
 
 
