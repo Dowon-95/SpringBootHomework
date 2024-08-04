@@ -23,7 +23,6 @@ public class BoardService {
     public void save(BoardDTO dto) {
         Board boards = dto.toEntity();
         boardRepository.save(boards);
-
     }
 
     @Transactional
@@ -33,22 +32,20 @@ public class BoardService {
 
 
     @Transactional
-    public ResponseEntity<String> delete(Long id){
+    public void delete(Long id){
         boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("없어")
         );
         boardRepository.deleteById(id);
-        return new ResponseEntity<>("board삭제", HttpStatus.OK);
     }
 
     @Transactional
-    public ResponseEntity<String> update(Long id, BoardDTO dto){
+    public void update(Long id, BoardDTO dto){
         Board target = boardRepository.findById(id).orElse(null);
         if ( target != null){
             target.setTitle(dto.getTitle());
             target.setContent(dto.getContent());
             target.setAuthor(dto.getAuthor());
         }
-        return new ResponseEntity<>("board저장",HttpStatus.OK);
     }
 }

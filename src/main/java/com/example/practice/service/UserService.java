@@ -20,13 +20,9 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public ResponseEntity<String> save(UserDTO dto) {
+    public void save(UserDTO dto) {
         Users users = dto.toEntity();
-        if(!dto.getEmail().contains("@")){
-            return new ResponseEntity<>("실패",HttpStatus.BAD_REQUEST);
-        }
         userRepository.save(users);
-        return new ResponseEntity<>("저장", HttpStatus.OK);
     }
 
     @Transactional
@@ -36,22 +32,20 @@ public class UserService {
 
 
     @Transactional
-    public ResponseEntity<String> delete(Long id){
-        Users target = userRepository.findById(id).orElseThrow(
+    public void delete(Long id){
+        userRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("없어")
         );
         userRepository.deleteById(id);
-        return new ResponseEntity<>("삭제", HttpStatus.OK);
     }
 
     @Transactional
-    public ResponseEntity<String> update(Long id, UserDTO dto){
+    public void update(Long id, UserDTO dto){
         Users target = userRepository.findById(id).orElse(null);
         if ( target != null){
             target.setName(dto.getName());
             target.setEmail(dto.getEmail());
             target.setNumber(dto.getNumber());
         }
-        return new ResponseEntity<>("저장",HttpStatus.OK);
     }
 }

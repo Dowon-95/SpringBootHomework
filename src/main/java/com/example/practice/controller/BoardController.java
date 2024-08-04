@@ -35,13 +35,14 @@ public class BoardController {
 
 	@DeleteMapping("/board/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
-		return boardService.delete(id);
+		boardService.delete(id);
+		return new ResponseEntity<>("board삭제", HttpStatus.OK);
 	}
 
 	@PostMapping("/board/{id}")
 	public ResponseEntity<String> updateUsers(@PathVariable Long id,@RequestBody BoardDTO dto){
-		return boardService.update(id,dto);
-
+		boardService.update(id,dto);
+		return new ResponseEntity<>("board저장",HttpStatus.OK);
 	}
 
 
