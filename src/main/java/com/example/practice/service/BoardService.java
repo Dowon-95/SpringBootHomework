@@ -20,10 +20,10 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public ResponseEntity<String> save(BoardDTO dto) {
+    public void save(BoardDTO dto) {
         Board boards = dto.toEntity();
         boardRepository.save(boards);
-        return new ResponseEntity<>("board저장", HttpStatus.OK);
+
     }
 
     @Transactional
@@ -34,7 +34,7 @@ public class BoardService {
 
     @Transactional
     public ResponseEntity<String> delete(Long id){
-        Board target = boardRepository.findById(id).orElseThrow(
+        boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("없어")
         );
         boardRepository.deleteById(id);

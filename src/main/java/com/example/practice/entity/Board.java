@@ -11,8 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "S_USER")
-public class Board {
+@Table(name = "S_Board")
+public class Board extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

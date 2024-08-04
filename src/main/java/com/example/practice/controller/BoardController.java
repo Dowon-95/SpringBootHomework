@@ -7,6 +7,7 @@ import com.example.practice.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,8 @@ public class BoardController {
 
 	@PostMapping("/board")
 	public ResponseEntity<String> save(@RequestBody BoardDTO dto) {
-		return boardService.save(dto);
-
+		boardService.save(dto);
+		return new ResponseEntity<>("board저장", HttpStatus.OK);
 	}
 
 	@GetMapping("/board")
