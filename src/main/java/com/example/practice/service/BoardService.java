@@ -4,7 +4,11 @@ import com.example.practice.entity.Board;
 import com.example.practice.dto.BoardDTO;
 import com.example.practice.respository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,8 +30,9 @@ public class BoardService {
     }
 
     @Transactional
-    public List<Board> show() {
-        return boardRepository.findAll();
+    public Page<Board> getList(int page) {
+        Pageable pageable = PageRequest.of(page,5);
+        return this.boardRepository.findAll(pageable);
     }
 
 
@@ -48,4 +53,5 @@ public class BoardService {
             target.setAuthor(dto.getAuthor());
         }
     }
+
 }

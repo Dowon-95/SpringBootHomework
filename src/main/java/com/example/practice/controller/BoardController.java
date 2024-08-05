@@ -7,8 +7,10 @@ import com.example.practice.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +30,11 @@ public class BoardController {
 		return new ResponseEntity<>("board저장", HttpStatus.OK);
 	}
 
-	@GetMapping("/board")
-	public List<Board>  showUsers(){
-		return  boardService.show();
+	@GetMapping("/board/{paging}")
+	public ResponseEntity<Page<Board>> showUsers( @RequestParam(value = "page", defaultValue = "0")int page){
+		Page<Board> paging = this.boardService.getList(page);
+		return new ResponseEntity<>(paging, HttpStatus.OK);
+
 	}
 
 	@DeleteMapping("/board/{id}")
